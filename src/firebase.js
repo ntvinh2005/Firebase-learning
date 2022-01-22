@@ -1,14 +1,28 @@
 import firebase from "firebase/app"
 import "firebase/auth"
+import "firebase/firestore"
+import "firebase/storage"
 
 const app = firebase.initializeApp({
-    apiKey: "AIzaSyAsK3Ii_ZKYaQbnxyS1J7ZzyaN5__cOKwA",
-    authDomain: "auth-production-fb8af.firebaseapp.com",
-    projectId: "auth-production-fb8af",
-    storageBucket: "auth-production-fb8af.appspot.com",
-    messagingSenderId: "1010548806587",
-    appId: "1:1010548806587:web:40ab1957aebacd4b956a9e"
+    apiKey: "AIzaSyBMIYHUzIBR7kUnj2zqOS36mErde72_SQA",
+    authDomain: "drive-production-a5e7d.firebaseapp.com",
+    projectId: "drive-production-a5e7d",
+    storageBucket: "drive-production-a5e7d.appspot.com",
+    messagingSenderId: "706387200512",
+    appId: "1:706387200512:web:680fafa51c95fbd34826e5"
 })
 
 export const auth = app.auth()
+export const firestore = app.firestore()
+export const database = {
+    folders: firestore.collection('folders'),
+    files: firestore.collection('files'),
+    formatDoc: doc => {
+        return {
+            id: doc.id, ...doc.data()
+        }
+    },
+    getCurrentTimestamp: firebase.firestore.FieldValue.serverTimestamp,
+}
+export const storage = app.storage()
 export default app
